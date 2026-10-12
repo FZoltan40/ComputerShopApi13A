@@ -85,7 +85,7 @@ namespace ComputerShopApi.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("deleteOsystem")]
         public object DeleteOsystem([FromQuery] Guid id)
         {
             var osystem = _context.Osystems.SingleOrDefault(os => os.Id == id);
