@@ -57,7 +57,7 @@ namespace ComputerShopApi.Controllers
             
         }
 
-        [HttpPost("updateOsystem")]
+        [HttpPut("updateOsystem")]
         public object UpdateOsystem([FromQuery]Guid id,[FromBody]UpdateOsystemDto updateOsystemDto)
         {
             var osystem = _context.Osystems.FirstOrDefault(os => os.Id == id);
