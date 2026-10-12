@@ -71,10 +71,34 @@ namespace ComputerShopApi.Controllers
                 osystem.UpdateTime = DateTime.Now;
 
                 _context.Osystems.Update(osystem);
+                _context.SaveChanges();
 
                 return StatusCode(200, new { message = "Sikeres frissítés", result = osystem });
             }
             else if(osystem == null)
+            {
+                return StatusCode(404, new { message = "Nincs ilyen Id-vel osystem", result = osystem });
+            }
+            else
+            {
+                return StatusCode(400, new { message = "Hiba a frissítésben", result = e.Message });
+            }
+        }
+
+        [HttpDelete]
+        public object DeleteOsystem([FromQuery] Guid id)
+        {
+            var osystem = _context.Osystems.SingleOrDefault(os => os.Id == id);
+            Exception e = new();
+
+            if (osystem != null)
+            {
+                _context.Osystems.Remove(osystem);
+                _context.SaveChanges();
+
+                return StatusCode(200, new { message = "Sikeres törlés", result = osystem });
+            }
+            else if (osystem == null)
             {
                 return StatusCode(404, new { message = "Nincs ilyen Id-vel osystem", result = osystem });
             }
